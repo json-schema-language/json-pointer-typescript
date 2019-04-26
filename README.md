@@ -13,41 +13,33 @@ Construct a JSON Pointer using `Ptr.parse`, and then evaluate the pointer using
 `.eval()`. You can convert back to a string using `.toString()`.
 
 ```ts
-import Ptr from "@json-schema-spec/json-pointer"
+import Ptr from "@json-schema-language/json-pointer";
 
 const data = {
   path: {
     to: {
-      thing: [
-        "foo",
-        "bar",
-        "baz",
-      ],
-    },
-  },
+      thing: ["foo", "bar", "baz"]
+    }
+  }
 };
 
 const pointer = Ptr.parse("/path/to/thing/2");
 console.log(pointer.eval(data)); // Output: baz
-console.log(pointer.toString()) // Output: /path/to/thing/2
+console.log(pointer.toString()); // Output: /path/to/thing/2
 ```
 
 If a JSON Pointer points to a non-existent property of its input, then `.eval()`
 will throw `EvalError`:
 
 ```ts
-import Ptr, { EvalError } from "@json-schema-spec/json-pointer"
+import Ptr, { EvalError } from "@json-schema-language/json-pointer";
 
 const data = {
   path: {
     to: {
-      thing: [
-        "foo",
-        "bar",
-        "baz",
-      ],
-    },
-  },
+      thing: ["foo", "bar", "baz"]
+    }
+  }
 };
 
 const pointer = Ptr.parse("/path/to/thing/4");
@@ -65,13 +57,13 @@ If you're interested in parsing JSON Pointers that might be invalid, you can
 catch these errors by looking for `InvalidPtrError`:
 
 ```ts
-import Ptr, { InvalidPtrError } from "@json-schema-spec/json-pointer"
+import Ptr, { InvalidPtrError } from "@json-schema-language/json-pointer";
 
 try {
-  Ptr.parse(" invalid json pointer")
+  Ptr.parse(" invalid json pointer");
 } catch (err) {
   if (err instanceof InvalidPtrError) {
-    console.error(err.ptr) // Output:  invalid json pointer
+    console.error(err.ptr); // Output:  invalid json pointer
   }
 }
 ```
